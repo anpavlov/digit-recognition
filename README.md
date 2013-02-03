@@ -3,8 +3,8 @@
 
 ### How to run
 
-0. \[Optional: I've already done this\] Run digit_maker.py in your terminal.
-    python digit\_maker.py
+0. \[Optional: I've already done this\] Run digit_maker.py in your terminal. This will generate noisy renditions of the clean PNGs in `training-sets/`.
+        python digit_maker.py
 1. Run digit_recog.py. As the argument, add the location of your 5x7px PNG file. For example, if I have a PNG file named `0_25.png` located in `training-sets/0/`, I would type:
 
         python digit_recog.py training-sets/0/0_25.png
