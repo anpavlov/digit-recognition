@@ -7,11 +7,11 @@
     python digit\_maker.py
 1. Run digit_recog.py. As the argument, add the location of your 5x7px PNG file. For example, if I have a PNG file named `0_25.png` located in `training-sets/0/`, I would type:
 
-        python digit\_recog.py training-sets/0/0\_25.png
+        python digit_recog.py training-sets/0/0_25.png
     
-2. From there, digit\_recog.py will indicate the number it thinks you have shown it.
+2. From there, `digit_recog.py` will indicate the number it thinks you have shown it.
 
-NB: Every time you run digit\_recog.py, it will train using the files in `training-set`. This takes approximately 5 seconds for me. I have not yet implemented a Neuron saving feature... but you can.
+NB: Every time you run `digit_recog.py`, it will train using the files in `training-set`. This takes approximately 5 seconds for me. I have not yet implemented a Neuron saving feature... but you can.
 
 ### The theory
 
