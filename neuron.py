@@ -1,5 +1,6 @@
 
 import random
+import math
 
 quiet = True
 
@@ -87,7 +88,7 @@ class Neuron(object):
       else:
         self.output = 0.0
     elif self.a_func == "sigmoid":
-      self.output = 1.0 / (1.0 + e**(-diff))
+      self.output = 1.0 / (1.0 + math.e**(-diff))
     else:
       print "Activation type incorrectly instantiated. Exiting."
       exit(1)

@@ -3,6 +3,7 @@ from neuron import Neuron
 from PIL import Image
 import os
 import sys
+import pickle
 
 def main():
   
@@ -10,7 +11,7 @@ def main():
   threshold  = 1
   width      = 35
   l_rate     = 0.005
-  err_margin = 0.1
+  err_margin = 0.1  # does nothing so far
   a_func     = "step"
   f_stretch  = 1
   
@@ -20,7 +21,24 @@ def main():
   for x in range(10):
     neurons.append(Neuron(width, a_func, f_stretch, threshold, l_rate, err_margin))
   
+  # train or load from file if save file exists
+  train(neurons)
   
+  # trial
+  test_img = Image.open(sys.argv[1])
+  
+  for x in range(len(neurons)):
+    n = neurons[x]
+    feed(test_img, n)
+    n.activate()
+    if n.get_output() == 1.0:
+      print "NEURON %i IS RESPONDING" %x
+
+
+def train(neurons):
+  """
+    Use data from training-sets directory to train.
+  """
   for digit in range(len(neurons)):
     
     print "TRAINING FOR %i" %digit
@@ -62,21 +80,24 @@ def main():
     # end of while loop
     
     
+    
     print "Images processed: %i" %counter
     
   # end of for loop
-  
-  test_img = Image.open(sys.argv[1])
-  
+  out = ""
   for x in range(len(neurons)):
     n = neurons[x]
-    print "NEURON %i" %x
-    feed(test_img, n)
-    n.activate()
-    print n.get_output()
+    out += str(x) + " " # insert digit
+    for i in range(n.get_width()): # insert weights
+      out += str(n.get_weight(i)) + " "
+    out += str(n.get_threshold()) + "\n"
+    
+  f = open("train-saves/train.save", "w")
+  f.write(out)
+  f.close()
+# end of def train
   
 
-  
 def feed(img, n):
   """
     Sets the inputs of neuron according to pixel data provided of image
