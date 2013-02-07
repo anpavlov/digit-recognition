@@ -7,13 +7,17 @@
 
         python digit_maker.py
         
-2. Run digit_recog.py. As the argument, add the location of your 5x7px PNG file. For example, if I have a PNG file named `0_25.png` located in `training-sets/0/`, I would type:
+2. Run digit_recog.py. To train on start, just type:
 
-        python digit_recog.py training-sets/0/0_25.png
+        python digit_recog.py
+
+3. If you want to load neuron data from a file (which I automatically save in the `data/` directory after every training session):
+
+        python digit_recog.py data/your_data_file
+        
+Note that `data/your_data_file` could be anywhere that leads to a [pickled](http://docs.python.org/2/library/pickle.html?highlight=pickle#pickle) Neuron list.
     
-3. From there, `digit_recog.py` will indicate the number it thinks you have shown it.
-
-NB: Every time you run `digit_recog.py`, it will train using the files in `training-set`. This takes approximately 5 seconds for me. I have not yet implemented a Neuron saving feature... but you can.
+4. From there, `digit_recog.py` will let you know what to do.
 
 ## The theory
 
