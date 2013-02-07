@@ -34,6 +34,7 @@ def main():
       out_file = open("data/" + out_name, "w")
       pickle.dump(neurons, out_file)
       print "Neuron data file saved in 'data/" + out_name + "'."
+      print "Proceeding with current training."
     else:
       print "USAGE: to train anew : python digit_recog.py"
       print "       to load data  : python digit_recog.py data/your_data_file"
@@ -44,6 +45,7 @@ def main():
     print "USAGE: to train anew : python digit_recog.py"
     print "       to load data  : python digit_recog.py data/your_data_file"
     exit(1)
+    
   print "================="
   print "DIGIT RECOGNITION"
   print "================="

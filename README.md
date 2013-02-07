@@ -10,7 +10,9 @@
 2. Run digit_recog.py. To train on start, just type:
 
         python digit_recog.py
-
+        
+    After training is finished, input a save name. It will proceed to digit recognition.
+    
 3. If you want to load neuron data from a file (which is automatically saved in the `data/` directory after every training session):
 
         python digit_recog.py data/your_data_file
