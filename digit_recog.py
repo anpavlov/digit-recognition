@@ -3,9 +3,92 @@ from neuron import Neuron
 from PIL import Image
 import os
 import sys
+import glob
 import pickle
 
+# neuron attributes
+threshold  = 1
+width      = 35
+l_rate     = 0.005
+err_margin = 0.1  # does nothing so far
+a_func     = "step"
+f_stretch  = 1
+
 def main():
+  
+  print "=============="
+  print "TRAINING PHASE"
+  print "=============="
+  neurons = list()
+  try: # if first argument is provided, load as neuron data
+    f = open(sys.argv[1], "r")
+    neurons = pickle.load(f)
+    print "Loaded " + sys.argv[1] + " as neuron data."
+  except IndexError: # if no neuron data file is provided, ask to train anew
+    yn = raw_input("No neuron data specified: train anew? (y/n) ")
+    if yn.lower()[0] == "y":
+      for x in range(10):
+        neurons.append(Neuron(width, a_func, f_stretch, threshold, l_rate, err_margin))
+      train(neurons)
+      out_name = raw_input("Save name: ")
+      out_file = open("data/" + out_name, "w")
+      pickle.dump(neurons, out_file)
+      print "Neuron data file saved in 'data/" + out_name + "'."
+    else:
+      print "USAGE: to train anew : python digit_recog.py"
+      print "       to load data  : python digit_recog.py data/your_data_file"
+      print "Exiting."
+      exit(1)
+  except IOError: # if neuron data file is unreadable, print error msg and exit
+    print "ERROR: neuron data file cannot be read."
+    print "USAGE: to train anew : python digit_recog.py"
+    print "       to load data  : python digit_recog.py data/your_data_file"
+    exit(1)
+  print "================="
+  print "DIGIT RECOGNITION"
+  print "================="
+  # list compatible images
+  compat = glob.glob("*.png")
+  if len(compat) > 0:
+    print "Compatible images found:"
+    print "---"
+    for png in compat:
+      print png
+    print "---"
+  else:
+    print "No compatible images found in current directory."
+    print "---"
+  
+  # prompt to input image name
+  while True:
+    try:
+      img_name = raw_input("Input image filename (Ctrl+C to exit): ")
+    except KeyboardInterrupt:
+      print
+      print "Exiting."
+      exit(0)
+    # process image
+    img = Image.open(img_name)
+    
+    counter = 0
+    ans = None
+    for x in range(len(neurons)):
+      n = neurons[x]
+      feed(img, n)
+      n.activate()
+      if n.get_output() == 1.0:
+        print "Neuron %i is responding." %x
+        ans = str(x)
+        counter += 1
+    
+    if counter == 1: # if one neuron responded
+      print img_name + " has been recognized as a " + ans + "."
+    else: # if multiple or no neurons responded
+      print img_name + " was unrecognizable."
+  
+  
+
+def old_main():
   
   # neuron attributes
   threshold  = 1
@@ -84,17 +167,7 @@ def train(neurons):
     print "Images processed: %i" %counter
     
   # end of for loop
-  out = ""
-  for x in range(len(neurons)):
-    n = neurons[x]
-    out += str(x) + " " # insert digit
-    for i in range(n.get_width()): # insert weights
-      out += str(n.get_weight(i)) + " "
-    out += str(n.get_threshold()) + "\n"
-    
-  f = open("train-saves/train.save", "w")
-  f.write(out)
-  f.close()
+  
 # end of def train
   
 
@@ -116,15 +189,6 @@ def feed(img, n):
 
 
 if __name__ == "__main__":
-  try:
-    test_img = Image.open(sys.argv[1])
-  except IOError:
-    print "Error: Image file cannot be read."
-    print "Usage: python digit_recog.py path/to/img.png"
-    exit(1)
-  except IndexError:
-    print "Error: Argument not found."
-    print "Usage: python digit_recog.py path/to/img.png"
-    exit(1)
+  
   
   main()
