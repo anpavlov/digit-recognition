@@ -1,11 +1,11 @@
 
 # 5x7 Digit Image Recognition: Python
 
-You need the [Python Imaging Library](http://www.pythonware.com/products/pil/) to run this program.
+You need [Python Imaging Library](http://www.pythonware.com/products/pil/) to run this program.
 
 ## How to run
 
-1. \[Optional: I've already done this\] Run digit_maker.py in your terminal. This will generate noisy renditions of the clean PNGs in `training-sets/`.
+1. Run digit_maker.py in your terminal. This will generate noisy renditions of the clean PNGs in `training-sets/`.
 
         python digit_maker.py
         
