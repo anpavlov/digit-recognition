@@ -1,4 +1,3 @@
-
 # 5x7 Digit Image Recognition: Python
 
 You need [Python Imaging Library](http://www.pythonware.com/products/pil/) to run this program.
@@ -44,3 +43,7 @@ And the activation function is a step function, 0 being not activated and 1 bein
 There are a multitude of algorithms I could have used to hardcode number recognition at this low resolution, and probably in a simpler fashion as well. I chose to use a neural network so that I could familiarize myself with the theory and the algorithms before scaling it up to multiple layers and multiple neurons per layer for future problems that might have higher complexity. My Neuron class is written with this thought in mind.
 
 Feel free to use any part of this repository for your own projects. Although the Neuron class is not comprehensive (as my artificial intelligence training is so far limited), I've put a lot of effort into making it versatile for the different usage scenarios that I am aware of.
+
+---
+
+Licensed under the MIT License. See `LICENSE` file for more details.
