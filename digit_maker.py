@@ -8,7 +8,7 @@ BLACK = (0,0,0)
 
 noise_amt = 0.3
 
-def add_noise(original, amt, num):
+def add_noise(original, amt, num, dig):
   """
     Takes a file and adds noise according to given amount (amt)
     PARAMS:
@@ -32,7 +32,7 @@ def add_noise(original, amt, num):
         print "Noise generated on pixel (%i, %i)" %(i,j)
       print pixels[i,j]
   
-  out_filename = os.path.splitext(original)[0] + "_%i.png" %num
+  out_filename = "tests/%i_%i.png" % (dig, num)
   img.save(out_filename, "PNG")
   print "Image saved as " + out_filename
   
@@ -41,5 +41,5 @@ def add_noise(original, amt, num):
 if __name__ == "__main__":
   
   for x in range(0,10):
-    for y in range(1, 31):
-      add_noise("training-sets/%i/%i.png"%(x,x),noise_amt, y)
+    for y in range(1, 6):
+      add_noise("training-sets/%i/%i.png"%(x,x),noise_amt, y, x)
